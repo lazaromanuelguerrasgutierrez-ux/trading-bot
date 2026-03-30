@@ -8,18 +8,12 @@ app.get("/", (req, res) => {
 });
 
 app.post("/webhook", (req, res) => {
-  console.log("Alerta recibida:", JSON.stringify(req.body, null, 2));
-
-  // Aquí luego conectas tu lógica de órdenes
-  // Por ahora solo confirma recepción
-  res.status(200).json({
-    success: true,
-    message: "Webhook recibido correctamente"
-  });
+  console.log("Webhook recibido:", JSON.stringify(req.body, null, 2));
+  res.status(200).json({ ok: true });
 });
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Servidor escuchando en 0.0.0.0:${PORT}`);
+  console.log(`Servidor corriendo en 0.0.0.0:${PORT}`);
 });
