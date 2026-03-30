@@ -1,18 +1,25 @@
 const express = require("express");
-
 const app = express();
+
 app.use(express.json());
 
-const PORT = process.env.PORT || 8080;
 app.get("/", (req, res) => {
-  res.send("Bot activo 🚀");
+  res.status(200).send("Servidor activo");
 });
 
 app.post("/webhook", (req, res) => {
-  console.log("📩 Señal recibida:", req.body);
-  res.send("OK");
+  console.log("Alerta recibida:", JSON.stringify(req.body, null, 2));
+
+  // Aquí luego conectas tu lógica de órdenes
+  // Por ahora solo confirma recepción
+  res.status(200).json({
+    success: true,
+    message: "Webhook recibido correctamente"
+  });
 });
 
-app.listen(PORT, () => {
-  console.log("Servidor corriendo en puerto " + PORT);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Servidor escuchando en 0.0.0.0:${PORT}`);
 });
